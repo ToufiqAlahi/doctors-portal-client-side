@@ -7,20 +7,20 @@ import Whitening from '../../assets/images/whitening.png'
 const Services = () => {
     const cardDatas = [
         {
-            _id: 1,
+            _id: 'p1',
             img: Fluoride,
             title: 'Fluoride Treatment',
             description: 'Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the'
         },
 
         {
-            _id: 2,
+            _id: 'p2',
             img: Cavity,
             title: 'Cavity Filling',
             description: 'Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the'
         },
         {
-            _id: 3,
+            _id: 'p3',
             img: Whitening,
             title: "Teeth Whitening",
             description: 'Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the',
