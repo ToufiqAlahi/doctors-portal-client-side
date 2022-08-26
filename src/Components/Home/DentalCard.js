@@ -4,8 +4,17 @@ import './module.dental.css'
 
 const DentalCard = () => {
     return (
-        <div>
-            
+        <div className='mb-32 lg:bg-banner-background'>
+            <div class="mx-40 grid grid-cols-1 md:grid-cols-2 gap-28  justify-center items-center">
+                <figure>
+                    <img className='border rounded-xl' src={DentalImg} alt="Album"></img>
+                </figure>
+                <div class="align-middle card-texts">
+                    <h2 class=" text-5xl font-bold">Exceptional Dental Care, on Your Terms</h2>
+                    <p class="mt-7">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsumis that it has a more-or-less normal distribution of letters,as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page</p>
+                    <button className="mt-7 btn btn-primary bg-gradient-to-r from-secondary to-primary  hover:from-primary hover:to-secondary text-white font-bold ">Get Started</button>
+                </div>
+            </div>
         </div>
     );
 };
