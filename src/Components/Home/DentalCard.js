@@ -6,7 +6,7 @@ const DentalCard = () => {
     return (
         <div className='mb-32 lg:bg-banner-background'>
             <div class="lg:mx-40 grid grid-cols-1 md:grid-cols-2 gap-20  justify-center text-left items-center lg:text-left">
-                <figure>
+                <figure className='mx-6'>
                     <img className='border rounded-xl' src={DentalImg} alt="Album"></img>
                 </figure>
                 <div class="align-middle text-left ">
