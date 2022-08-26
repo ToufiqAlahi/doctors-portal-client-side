@@ -5,40 +5,42 @@ import Cavity from '../../assets/images/cavity.png'
 import Whitening from '../../assets/images/whitening.png'
 
 const Services = () => {
-    const cardData = [
+    const cardDatas = [
         {
             _id: 1,
-            cardImg: Fluoride,
-            CardTitle: 'Fluoride Treatment',
-            cardDescription: 'Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the'
+            img: Fluoride,
+            title: 'Fluoride Treatment',
+            description: 'Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the'
         },
 
         {
             _id: 2,
-            cardImg: Cavity,
-            CardTitle: 'Cavity Filling',
-            cardDescription: 'Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the'
+            img: Cavity,
+            title: 'Cavity Filling',
+            description: 'Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the'
         },
         {
             _id: 3,
-            cardImg: Whitening,
-            CardTitle: "Teeth Whitening",
-            cardDescription: 'Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the',
+            img: Whitening,
+            title: "Teeth Whitening",
+            description: 'Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the',
         },
     ]
     return (
-        <div>
-
-
-            <div>
+        <div className='my-32 justify-center'>
+            <div className='text-center' >
+                <h3 className='text-xl text-primary uppercase font-bold mb-2' > our services</h3>
+                <h2 className='text-3xl uppercase'>Services we provide</h2>
                 
             </div>
 
 
-            <div>
+            <div className='mt-16 grid gap-9 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center'>
                 {
-
-
+                    cardDatas.map(cardData => <ServiceCard
+                        key={cardData._id}
+                        cardData={cardData}
+                    ></ServiceCard>)
                 }
             </div>
         </div>
