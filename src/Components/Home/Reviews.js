@@ -14,14 +14,14 @@ const Reviews = () => {
             text: 'It is a long established fact that by the readable content of a lot layout. The point of using Lorem a more-or-less normal distribu to using Content here, content',
         },
         {
-            _id: 1,
+            _id: 2,
             img: Angella,
             name: 'Angella Zoley',
             address: 'California',
             text: 'It is a long established fact that by the readable content of a lot layout. The point of using Lorem a more-or-less normal distribu to using Content here, content',
         },
         {
-            _id: 1,
+            _id: 3,
             img: Cody,
             name: 'Cody Simpson',
             address: 'California',
