@@ -4,7 +4,7 @@ import './module.HomeAppointment.css'
 
 const HomeAppointment = () => {
     return (
-        <div className='lg:mt-72 mb-32 bg-appointment-background w-full p-4 lg:py-0 lg:px-44'>
+        <div className=' lg:mt-72 mb-32 bg-appointment-background w-full p-4 lg:py-0 lg:px-44'>
             <div className=" md:grid  md:grid-cols-2  text-left items-center md:text-left">
                 <figure className='hidden lg:block'>
                     <img className=' mt-[-120px]' src={Doctor} alt="Album"></img>
