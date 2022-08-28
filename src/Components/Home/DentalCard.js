@@ -4,8 +4,8 @@ import './module.dental.css'
 
 const DentalCard = () => {
     return (
-        <div className='px-4 lg:px-10 mb-32 lg:bg-banner-background'>
-            <div className="lg:mx-40 grid grid-cols-1 md:grid-cols-2 gap-20  justify-center text-left items-center lg:text-left">
+        <div className='px-4  lg:min-h-screen flex bg-left my-auto lg:px-10 mb-32 lg:bg-banner-background'>
+            <div className="lg:mx-40 grid my-auto grid-cols-1 md:grid-cols-2 gap-20  justify-center text-left items-center lg:text-left">
                 <figure className='mx-6'>
                     <img className='border rounded-xl' src={DentalImg} alt="Album"></img>
                 </figure>
