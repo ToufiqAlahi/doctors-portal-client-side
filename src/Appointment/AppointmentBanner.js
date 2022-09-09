@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import chair from '../assets/images/chair.png'
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import { format } from 'date-fns';
 
 
-const AppointmentBanner = () => {
-    const [date, setDate] = useState(new Date())
+
+const AppointmentBanner = ({date, setDate}) => {
+    
     return (
         <div>
             <div className="   hero lg:min-h-screen items-center max-w-screen lg:bg-banner-background ">
@@ -19,8 +19,8 @@ const AppointmentBanner = () => {
                             selected={date}
                             onSelect={setDate}
                         />
-                            
-                       <p>Date selected: { format(date, 'PP' ) }</p>
+
+                       
                        
                     </div>
                 </div>
