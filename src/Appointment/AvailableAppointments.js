@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import Service from './Service';
+import Slots from './Slots';
 
 const AvailableAppointments = ({ date }) => {
     const [services, setServices] = useState([]);
@@ -22,6 +23,14 @@ const AvailableAppointments = ({ date }) => {
                         key={service._id}
                         service={service}
                     ></Service>)
+                }
+            </div>
+            <div className='mt-24 grid grid-cols-1 lg:grid-cols-3 mg:grid-cols-2 gap-5 justify-center items-center'>
+                {
+                    services.map(service => <Slots
+                        key={service._id}
+                        service={service}
+                    ></Slots>)
                 }
             </div>
         </div>
