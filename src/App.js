@@ -4,20 +4,21 @@ import { Routes, Route } from "react-router-dom";
 import Home from './Components/Home/Home';
 import About from './Components/About/About';
 import Login from './Components/Login/Login';
-import Footer from './Components/Shared/Footer';
+// import Footer from './Components/Shared/Footer';
+import Appointment from './Appointment/Appointment';
 
 function App() {
   return (
-    <div>
+    <div className='mx-auto'>
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="home" element={<Home />} />
         <Route path="about" element={<About />} />
+        <Route path="Appointment" element={<Appointment />} />
         <Route path="Login" element={<Login />} />
       </Routes>
-      <Footer></Footer>
     </div>
   );
 }
-
 export default App;
