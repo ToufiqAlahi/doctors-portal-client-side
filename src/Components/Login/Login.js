@@ -117,15 +117,17 @@ const Login = () => {
                         {
                             signInErrorMessage
                         }
-                        <input className="btn w-full max-w-xs text-white" value="Login" type="submit" />
+                        <input className="btn btn-accent w-full max-w-xs text-white" value="Login" type="submit" />
                     </form>
                     <p className='text-xs text-center' >New to Doctor's Portal? <Link className='text-secondary' to='/signup'>Create new account</Link> </p>
                     <div className="divider">OR</div>
+
                     <button
                         onClick={() => signInWithGoogle()}
-                        className="btn btn-outline ">
-                        <img className='w-8 mr-2  ' src={google} alt="" />
-                        Continue with Google</button>
+                        className="btn btn-outline  ease-in hover:text-white hover:btn-accent">
+                        <img className='w-8 mr-3  ' src={google} alt="" />
+                        Continue with Google
+                    </button>
                 </div>
             </div>
         </div>
