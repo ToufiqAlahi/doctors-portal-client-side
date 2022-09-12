@@ -6,6 +6,7 @@ import About from './Components/About/About';
 import Login from './Components/Login/Login';
 // import Footer from './Components/Shared/Footer';
 import Appointment from './Appointment/Appointment';
+import SignUp from './Components/Login/SignUp';
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
         <Route path="home" element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="Appointment" element={<Appointment />} />
-        <Route path="Login" element={<Login />} />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<SignUp/>} />
       </Routes>
     </div>
   );
