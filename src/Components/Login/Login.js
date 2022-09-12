@@ -4,6 +4,7 @@ import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import google from '../../../src/assets/icons/social/google.png'
 import Loading from '../Shared/Loading/Loading';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -16,8 +17,14 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
+    let signInErrorMessage;
+    if (error || googleError) {
+        signInErrorMessage = <p className='pb-4 text-lg text-red-500'>{error?.message || googleError?.message}</p>
+    }
+
+
     if (loading || googleLoading) {
-        return <Loading></Loading> ;
+        return <Loading></Loading>;
     }
 
     if (googleUser) {
@@ -53,7 +60,8 @@ const Login = () => {
                                         message: 'Email is Required'
 
                                     },
-                                    pattern: {value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                    pattern: {
+                                        value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                                         message: 'Please Provide a valid Email'
                                     }
                                 })}
@@ -102,12 +110,16 @@ const Login = () => {
                                 {errors.password?.type === 'maxLength' && <span className="label-text-alt text-red-600">{errors.password.message}</span>}
                                 {errors.password?.type === 'pattern' && <span className="label-text-alt text-red-600">{errors.password.message}</span>}
                             </label>
+                            <button className='btn-sm text-[10px] text-left  mt-[-20px]'>Forgot Password?</button>
                         </div>
                         <input />
 
-                       
+                        {
+                            signInErrorMessage
+                        }
                         <input className="btn w-full max-w-xs text-white" value="Login" type="submit" />
                     </form>
+                    <p className='text-xs text-center' >New to Doctor's Portal? <Link className='text-secondary' to='/signup'>Create new account</Link> </p>
                     <div className="divider">OR</div>
                     <button
                         onClick={() => signInWithGoogle()}
