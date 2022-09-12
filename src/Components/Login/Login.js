@@ -4,6 +4,7 @@ import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-fireba
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import google from '../../../src/assets/icons/social/google.png'
+import Loading from '../Shared/Loading/Loading';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -17,11 +18,7 @@ const Login = () => {
     ] = useSignInWithEmailAndPassword(auth);
 
     if (loading || googleLoading) {
-        return <div class="loader">
-            <div class="inner one"></div>
-            <div class="inner two"></div>
-            <div class="inner three"></div>
-        </div>;
+        return <Loading></Loading> ;
     }
 
     if (googleUser) {
