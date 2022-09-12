@@ -37,11 +37,11 @@ const SignUp = () => {
     }
 
     const onSubmit = async (data) => {
-        console.log(data)
+        
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({ displayName: data.name});
-        console.log('update done')
-        navigate('/Appointment')
+        console.log('update done');
+        navigate('/Appointment');
     };
     return (
         <div className='flex justify-center items-center h-screen'>
@@ -146,7 +146,7 @@ const SignUp = () => {
                         <input className="btn btn-accent w-full max-w-xs text-white" value="Sign Up" type="submit" />
                     </form>
 
-                    <p className='text-xs text-center' >Already Have an Account? <Link className='text-secondary' to='/login'>Please Login</Link> </p>
+                    <p className='text-xs text-center' >Already Have an Account? <Link className='text-secondary ' to='/login'>Please Login</Link> </p>
 
                     <div className="divider">OR</div>
 
