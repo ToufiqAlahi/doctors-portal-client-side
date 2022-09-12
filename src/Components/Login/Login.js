@@ -1,18 +1,36 @@
 import React from 'react';
-// import { getAuth, signInWithEmailAndPassword, signInWithGoogle , signOut } from 'firebase/auth';
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import './module.Login.css';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import google from '../../../src/assets/icons/social/google.png'
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-    if (user) {
-        console.log(user);
+    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useSignInWithEmailAndPassword(auth);
+
+    if (loading || googleLoading) {
+        return <div class="loader">
+            <div class="inner one"></div>
+            <div class="inner two"></div>
+            <div class="inner three"></div>
+        </div>;
     }
+
+    if (googleUser) {
+        console.log(googleUser);
+    }
+
     const onSubmit = (data) => {
         console.log(data)
+        signInWithEmailAndPassword(data.email, data.password);
 
 
     };
@@ -39,8 +57,7 @@ const Login = () => {
                                         message: 'Email is Required'
 
                                     },
-                                    pattern: {
-                                        value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                    pattern: {value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                                         message: 'Please Provide a valid Email'
                                     }
                                 })}
