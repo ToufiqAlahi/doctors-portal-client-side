@@ -119,7 +119,7 @@ const Login = () => {
                         }
                         <input className="btn btn-accent w-full max-w-xs text-white" value="Login" type="submit" />
                     </form>
-                    <p className='text-xs text-center' >New to Doctor's Portal? <Link className='text-secondary' to='/signup'>Create new account</Link> </p>
+                    <p className='text-xs text-center' >New to Doctor's Portal? <Link  className='text-secondary' to='/signup'>Create new account</Link> </p>
                     <div className="divider">OR</div>
 
                     <button
