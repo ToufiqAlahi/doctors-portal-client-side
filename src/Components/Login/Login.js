@@ -29,7 +29,7 @@ const Login = () => {
 
     if (googleUser) {
         console.log(googleUser);
-        navigate('/Appointment');
+        // navigate('/Appointment');
     }
 
     const onSubmit = (data) => {
