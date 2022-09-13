@@ -32,10 +32,10 @@ const SignUp = () => {
         return <Loading></Loading>;
     }
 
-    if (googleUser) {
-        console.log(googleUser);
+    // if (googleUser) {
+    //     console.log(googleUser);
         
-    }
+    // }
 
     const onSubmit = async (data) => {
         
