@@ -1,7 +1,7 @@
 import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import auth from '../../firebase.init';
 
 
@@ -10,18 +10,25 @@ const Navbar = () => {
     const logout = () => {
         signOut(auth);
     };
-
-
     const location = useLocation();
     const menuItems =
         <>
-            <li className={`${("/Home" === location.pathname || "/" === location.pathname ? "bg-accent rounded-xl text-white":"")}`}><Link to="/Home">Home</Link></li>
-            <li className={`${("/About" === location.pathname && "bg-accent rounded-xl text-white")}`}><Link to="/About">About</Link></li>
-            <li className={`${("/Appointment" === location.pathname && "bg-accent rounded-xl text-white")}`}><Link to="/Appointment">Appointment</Link></li>
-            <li className={`${("/Reviews" === location.pathname && "bg-accent rounded-xl text-white")}`}><Link to="/Reviews">Reviews</Link></li>
-            <li className={`${("/Contact" === location.pathname && "bg-accent rounded-xl text-white")}`}><Link to="/Contact">Contact Us</Link></li>
-            <li >{user ? <button onClick={logout} className="btn btn-ghost capitalize">Sign Out</button> : <Link  to="/login">Login</Link>}</li>
+            <li className={`${("/Home" === location.pathname || "/" === location.pathname ? "bg-accent rounded-xl text-white" : "")}`}><Link className=" link-hover" to="/Home">Home</Link></li>
+            <li className={`${("/About" === location.pathname && "bg-accent rounded-xl text-white")}`}>  <Link className=" link-hover" to="/About">About</Link></li>
+            <li className={`${("/Appointment" === location.pathname && "bg-accent rounded-xl text-white")}`}><Link className=" link-hover" to="/Appointment">Appointment</Link></li>
+            <li className={`${("/Reviews" === location.pathname && "bg-accent rounded-xl text-white")}`}><Link className=" link-hover" to="/Reviews">Reviews</Link></li>
+            <li className={`${("/Contact" === location.pathname && "bg-accent rounded-xl text-white")}`}><Link className=" link-hover" to="/Contact">Contact Us</Link></li>
+
+            <li
+                className={`${("/login" === location.pathname && "link-hover bg-accent rounded-xl text-white")}`}
+            >
+                {
+                    user ? <Link onClick={logout} to="/" className=" link-hover capitalize">Sign Out</Link>
+                        : <Link className=" link-hover" to="/login">Login</Link>
+                }
+            </li>
         </>
+
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
