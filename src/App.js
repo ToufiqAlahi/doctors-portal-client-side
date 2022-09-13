@@ -7,6 +7,7 @@ import Login from './Components/Login/Login';
 // import Footer from './Components/Shared/Footer';
 import Appointment from './Appointment/Appointment';
 import SignUp from './Components/Login/SignUp';
+import RequireAuth from './Components/Login/RequireAuth';
 
 function App() {
   return (
@@ -16,9 +17,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="home" element={<Home />} />
         <Route path="about" element={<About />} />
-        <Route path="Appointment" element={<Appointment />} />
+        <Route path="Appointment" element={<RequireAuth> <Appointment /> </RequireAuth>} />
         <Route path="login" element={<Login />} />
-        <Route path="signup" element={<SignUp/>} />
+        <Route path="signup" element={<SignUp />} />
       </Routes>
     </div>
   );
