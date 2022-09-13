@@ -34,6 +34,7 @@ const SignUp = () => {
 
     if (googleUser) {
         console.log(googleUser);
+        
     }
 
     const onSubmit = async (data) => {
