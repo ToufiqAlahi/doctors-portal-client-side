@@ -4,7 +4,7 @@ import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import google from '../../../src/assets/icons/social/google.png'
 import Loading from '../Shared/Loading/Loading';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -16,7 +16,7 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
-
+    const navigate = useNavigate();
     let signInErrorMessage;
     if (error || googleError) {
         signInErrorMessage = <p className='pb-4 text-lg text-red-500'>{error?.message || googleError?.message}</p>
@@ -29,6 +29,7 @@ const Login = () => {
 
     if (googleUser) {
         console.log(googleUser);
+        navigate('/Appointment');
     }
 
     const onSubmit = (data) => {
