@@ -58,7 +58,7 @@ const Navbar = () => {
             </div> */}
 
             {
-                user ? <div className="dropdown dropdown-end">
+                user ? <div className="dropdown dropdown-end absolute right-5 top-2 ">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="">
                             <img referrerPolicy="no-referrer"
