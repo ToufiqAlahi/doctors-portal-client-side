@@ -4,7 +4,7 @@ import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import google from '../../../src/assets/icons/social/google.png'
 import Loading from '../Shared/Loading/Loading';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -17,6 +17,8 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
     const navigate = useNavigate();
+    const location = useLocation();
+    let from = location.state?.from?.pathname || "/";
     let signInErrorMessage;
     if (error || googleError) {
         signInErrorMessage = <p className='pb-4 text-lg text-red-500'>{error?.message || googleError?.message}</p>
@@ -27,13 +29,13 @@ const Login = () => {
         return <Loading></Loading>;
     }
 
-    if (googleUser) {
-        console.log(googleUser);
-        // navigate('/Appointment');
+    if (user || googleUser) {
+        // console.log(googleUser);
+        navigate(from, {replace:true});
     }
 
     const onSubmit = (data) => {
-        console.log(data)
+        // console.log(data)
         signInWithEmailAndPassword(data.email, data.password);
 
 
@@ -120,7 +122,7 @@ const Login = () => {
                         }
                         <input className="btn btn-accent w-full max-w-xs text-white" value="Login" type="submit" />
                     </form>
-                    <p className='text-xs text-center' >New to Doctor's Portal? <Link  className='text-secondary' to='/signup'>Create new account</Link> </p>
+                    <p className='text-xs text-center' >New to Doctor's Portal? <Link className='text-secondary' to='/signup'>Create new account</Link> </p>
                     <div className="divider">OR</div>
 
                     <button
