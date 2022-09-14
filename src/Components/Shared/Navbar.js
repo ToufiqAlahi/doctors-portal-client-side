@@ -7,7 +7,7 @@ import auth from '../../firebase.init';
 
 const Navbar = () => {
     const [user, loading, error] = useAuthState(auth);
-    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+    // const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     // console.log(user);
     const logout = () => {
         signOut(auth);
@@ -78,7 +78,7 @@ const Navbar = () => {
                         <li onClick={logout} to="/" ><a>Logout</a></li>
                     </ul>
                 </div>
-                    : null
+                    : ""
             }
         </div>
     );
