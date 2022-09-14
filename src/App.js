@@ -9,6 +9,9 @@ import SignUp from './Components/Login/SignUp';
 import RequireAuth from './Components/Login/RequireAuth';
 import Loading from './Components/Shared/Loading/Loading';
 import { useState, useEffect } from 'react';
+import { ToastContainer} from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -35,6 +38,7 @@ function App() {
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<SignUp />} />
             </Routes>
+            <ToastContainer />
           </div>)
       }
     </>
