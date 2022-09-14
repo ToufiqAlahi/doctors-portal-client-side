@@ -1,15 +1,45 @@
 import React from 'react';
 import { format } from 'date-fns';
+import { useAuthState} from 'react-firebase-hooks/auth';
+import auth from '../firebase.init';
+import {  toast } from 'react-toastify';
 
 const BookingModal = ({ date, treatment, setTreatment }) => {
-    const {_id, name, slots } = treatment;
-
+    const { _id, name, slots } = treatment;
+    const formatedDate = format(date, 'PP');
     const handleBooking = event => {
         event.preventDefault();
         const slot = event.target.slot.value;
-        console.log(Math.random)
-        setTreatment(null);
+
+        const booking = {
+            treatmentId: _id,
+            treatment: name,
+            date: formatedDate,
+            slot,
+            patientName: user.displayName,
+            patientEmail: user.email,
+            phone: event.target.phone.value
+        }
+
+        fetch('http://localhost:5000/booking', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setTreatment(null);
+            })
+
+
     }
+
+    const [user, loading, error] = useAuthState(auth);
+    // const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+    console.log(user);
 
     return (
         <div>
@@ -23,13 +53,12 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
 
                         <select name='slot' className="select select-bordered w-full ">
                             {
-                                slots && slots.map(slot => <option  value={slot}> {slot} </option>)
+                                slots && slots.map(slot => <option value={slot}> {slot} </option>)
                             }
-                            
                         </select>
 
-                        <input type="text" placeholder="Your Name" className="input input-bordered w-full" />
-                        <input type="email" name='email' placeholder="Your Email Address" className="input input-bordered w-full" />
+                        <input disabled value={user?.displayName} type="text" placeholder="Your Name" className="font-bold input input-bordered w-full " />
+                        <input disabled value={user?.email} type="email" name='email' placeholder="Your Email Address" className="font-bold input input-bordered w-full " />
                         <input type="text" name='Phone' placeholder="Your Phone Number" className="input input-bordered w-full" />
                         <input type="submit" value="submit" className="btn btn-secondary w-full " />
                     </form>
