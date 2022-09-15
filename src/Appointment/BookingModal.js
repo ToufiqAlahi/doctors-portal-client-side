@@ -6,6 +6,7 @@ import {  toast } from 'react-toastify';
 
 const BookingModal = ({ date, treatment, setTreatment }) => {
     const { _id, name, slots } = treatment;
+    const [user, loading, error] = useAuthState(auth);
     const formatedDate = format(date, 'PP');
     const handleBooking = event => {
         event.preventDefault();
@@ -18,7 +19,7 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
             slot,
             patientName: user.displayName,
             patientEmail: user.email,
-            phone: event.target.phone.value
+            phone:event.target.phone.value
         }
 
         fetch('http://localhost:5000/booking', {
@@ -37,7 +38,7 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
 
     }
 
-    const [user, loading, error] = useAuthState(auth);
+   
     // const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     console.log(user);
 
@@ -53,20 +54,20 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
 
                         <select name='slot' className="select select-bordered w-full ">
                             {
-                                slots && slots.map(slot => <option value={slot}> {slot} </option>)
+                                slots? slots.map(slot => <option value={slot}> {slot} </option>) :''
                             }
                         </select>
 
-                        <input disabled value={user?.displayName} type="text" placeholder="Your Name" className="font-bold input input-bordered w-full " />
-                        <input disabled value={user?.email} type="email" name='email' placeholder="Your Email Address" className="font-bold input input-bordered w-full " />
-                        <input type="text" name='Phone' placeholder="Your Phone Number" className="input input-bordered w-full" />
+                        <input disabled value={user?.displayName || ''} type="text" placeholder="Your Name" className="font-bold input input-bordered w-full " />
+                        <input disabled value={user?.email || ''} type="email" name='email' placeholder="Your Email Address" className="font-bold input input-bordered w-full " />
+                        <input type="text" name='phone' placeholder="Your Phone Number" className="input input-bordered w-full" />
                         <input type="submit" value="submit" className="btn btn-secondary w-full " />
                     </form>
 
 
-                    <div className="modal-action">
+                    {/* <div className="modal-action">
                         <label htmlFor="booking-modal" className="btn btn-sm font-extrabold text-xl text-white btn-circle hover:bg-secondary absolute right-2 top-2">✕</label>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div >
