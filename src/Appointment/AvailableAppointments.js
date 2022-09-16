@@ -14,7 +14,7 @@ const AvailableAppointments = ({ date }) => {
         fetch(`http://localhost:5000/available?date=${formatedDate}`)
             .then(res => res.json())
             .then(data => setServices(data));
-    },[])
+    },[formatedDate])
     
     return (
         <div className='h-screen text-center my-48'>
