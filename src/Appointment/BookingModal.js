@@ -1,8 +1,8 @@
 import React from 'react';
 import { format } from 'date-fns';
-import { useAuthState} from 'react-firebase-hooks/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const BookingModal = ({ date, treatment, setTreatment }) => {
     const { _id, name, slots } = treatment;
@@ -17,9 +17,9 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
             treatment: name,
             date: formatedDate,
             slot,
+            patient: user.email,
             patientName: user.displayName,
-            patientEmail: user.email,
-            phone:event.target.phone.value
+            phone: event.target.phone.value
         }
 
         fetch('http://localhost:5000/booking', {
@@ -31,16 +31,21 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                if (data.success) {
+                    toast.success(`Appointment is set, ${formatedDate} at ${slot}`)
+                }
+                else {
+                    toast.error(`Already have and appointment on ${data.booking?.date} at ${data.booking?.slot}`)
+                }
                 setTreatment(null);
-            })
+            });
 
 
     }
 
-   
+
     // const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
-    console.log(user);
+    // console.log(user);
 
     return (
         <div>
@@ -54,7 +59,9 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
 
                         <select name='slot' className="select select-bordered w-full ">
                             {
-                                slots? slots.map(slot => <option value={slot}> {slot} </option>) :''
+                                slots ? slots.map((slot, index) => <option
+                                    key={index}
+                                    value={slot}> {slot} </option>) : ''
                             }
                         </select>
 
@@ -65,9 +72,9 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
                     </form>
 
 
-                    {/* <div className="modal-action">
+                    <div className="modal-action">
                         <label htmlFor="booking-modal" className="btn btn-sm font-extrabold text-xl text-white btn-circle hover:bg-secondary absolute right-2 top-2">✕</label>
-                    </div> */}
+                    </div>
                 </div>
             </div>
         </div >
