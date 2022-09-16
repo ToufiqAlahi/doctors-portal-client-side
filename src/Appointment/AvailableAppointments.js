@@ -5,16 +5,20 @@ import { useState } from 'react';
 import Service from './Service';
 import Slots from './Slots';
 import BookingModal from './BookingModal';
+import { useQuery } from '@tanstack/react-query';
 
 const AvailableAppointments = ({ date }) => {
-    const [services, setServices] = useState([]); 
+    // const [services, setServices] = useState([]); 
     const [treatment, setTreatment] = useState({});
     const formatedDate = format(date, 'PP');
-    useEffect(() => {
-        fetch(`http://localhost:5000/available?date=${formatedDate}`)
-            .then(res => res.json())
-            .then(data => setServices(data));
-    },[formatedDate])
+
+    const { data: services } = useQuery('available', () => fetch(`http://localhost:5000/available?date=${formatedDate}`)
+            .then(res => res.json()))
+    // useEffect(() => {
+    //     fetch(`http://localhost:5000/available?date=${formatedDate}`)
+    //         .then(res => res.json())
+    //         .then(data => setServices(data));
+    // },[formatedDate])
     
     return (
         <div className='h-screen text-center my-48'>
