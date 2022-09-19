@@ -6,30 +6,29 @@ import Service from './Service';
 import Slots from './Slots';
 import BookingModal from './BookingModal';
 import { useQuery } from '@tanstack/react-query';
+import Loading from '../Components/Shared/Loading/Loading';
 
 const AvailableAppointments = ({ date }) => {
-    // const [services, setServices] = useState([]); 
     const [treatment, setTreatment] = useState({});
     const formatedDate = format(date, 'PP');
+    const { data: services, isLoading , refetch} = useQuery(['available', formatedDate ], () => fetch(`http://localhost:5000/available?date=${formatedDate}`)
+        .then(res => res.json())
+    )
 
-    const { data: services } = useQuery('available', () => fetch(`http://localhost:5000/available?date=${formatedDate}`)
-            .then(res => res.json()))
-    // useEffect(() => {
-    //     fetch(`http://localhost:5000/available?date=${formatedDate}`)
-    //         .then(res => res.json())
-    //         .then(data => setServices(data));
-    // },[formatedDate])
-    
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+
     return (
         <div className='h-screen text-center my-48'>
             <h3 className=' text-secondary text-2xl '>Available Services on: {format(date, 'PP')}</h3>
             <p className='text-xl'>Please select a service.</p>
             <div className='mt-24 grid grid-cols-1 lg:grid-cols-3 mg:grid-cols-2 gap-5 justify-center items-center'>
                 {
-                    services.map(service => <Service
+                    services?.map(service => <Service
                         key={service._id}
                         service={service}
-                        
+
                     ></Service>)
                 }
             </div>
@@ -41,11 +40,17 @@ const AvailableAppointments = ({ date }) => {
                         setTreatment={setTreatment}
                     ></Slots>)
                 }
-                
+
             </div>
-            {treatment && <BookingModal date={date} setTreatment={setTreatment} treatment={treatment}></BookingModal>}
+            {treatment && <BookingModal
+                date={date}
+                setTreatment={setTreatment}
+                treatment={treatment}
+            refetch={refetch}
+            ></BookingModal>}
         </div>
     );
+
 };
 
 export default AvailableAppointments;
