@@ -6,7 +6,7 @@ import auth from '../../firebase.init';
 
 
 const Navbar = () => {
-    const [user, loading, error] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     const logout = () => {
         signOut(auth);
     };
@@ -35,15 +35,15 @@ const Navbar = () => {
             </li>
 
             {
-                user && <div className="dropdown dropdown-end  right-5 top-2 ">
-                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                user && <div className="hidden md:block dropdown dropdown-end md:absolute  md:right-10 top-2">
+                    <label tabIndex={1} className="btn btn-ghost btn-circle avatar">
                         <div className="">
                             <img referrerPolicy="no-referrer"
                                 className=' border-4 border-secondary rounded-full'
                                 src={user?.photoURL} alt=" Img" />
                         </div>
                     </label>
-                    <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+                    <ul tabIndex={1} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
                         <li className='text-center my-4 text-xl text-semibold text-accent'>{user?.displayName}</li>
                         <li>
                             <a className="justify-between">
@@ -71,6 +71,28 @@ const Navbar = () => {
             </div>
             <div className="navbar-center hidden lg:flex  ">
                 <ul className="menu mx-4 menu-horizontal p-0 font-semibold "> {menuItems} </ul>
+                <div>
+                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                        <div className="w-full rounded-full">
+                            <img referrerPolicy="no-referrer"
+                                className=' border-4 border-secondary rounded-full'
+                                src={user?.photoURL} alt=" Img" />
+                        </div>
+
+                    </label>
+                    <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+                        <li className='text-center my-4 text-xl text-semibold text-accent'>{user?.displayName}</li>
+                        <li>
+                            <a className="justify-between">
+                                Profile
+                                <span className="badge">New</span>
+                            </a>
+                        </li>
+                        <li><a>Settings</a></li>
+                        <li ><label htmlFor="sign-out-Modal" to="/" className="link-hover capitalize"> Sign Out </label></li>
+                    </ul>
+                </div>
+                
             </div>
 
             {/*/ Sign out MODAL  */}
@@ -86,6 +108,11 @@ const Navbar = () => {
                         <label htmlFor="sign-out-Modal" className="btn btn-sm font-extrabold text-xl text-white btn-circle hover:bg-secondary absolute right-2 top-2">✕</label>
                     </div>
                 </div>
+            </div>
+            <div className="navbar-end">
+                <label tabIndex="1" htmlFor="dashboard-side-bar" className="btn btn-ghost drawer-button lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                </label>
             </div>
         </div>
     );
