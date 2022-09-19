@@ -12,6 +12,7 @@ import { useState, useEffect } from 'react';
 import { ToastContainer} from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
+import Dashboard from './Components/Dashboard';
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -35,6 +36,7 @@ function App() {
               <Route path="home" element={<Home />} />
               <Route path="about" element={<RequireAuth><About /></RequireAuth>} />
               <Route path="Appointment" element={<RequireAuth> <Appointment /> </RequireAuth>} />
+              <Route path="dashboard" element={<RequireAuth> <Dashboard/> </RequireAuth>} />
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<SignUp />} />
             </Routes>
