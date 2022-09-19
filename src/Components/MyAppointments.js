@@ -20,8 +20,8 @@ const MyAppointments = () => {
         <div>
             <h1 className="">My Appointments: {appointments.length} </h1>
 
-            <div className="overflow-x-auto pt-10 px-4">
-                <table className="table w-full">
+            <div className="overflow-x-auto pt-10 px-4 w-screen">
+                <table className="table w-full  ">
                     
                     <thead>
                         <tr>
