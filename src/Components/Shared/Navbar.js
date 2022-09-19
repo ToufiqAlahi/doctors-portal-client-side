@@ -33,29 +33,6 @@ const Navbar = () => {
                         : <Link className=" link-hover" to="/login">Login</Link>
                 }
             </li>
-
-            {/* {
-                user && <div className="hidden md:block dropdown dropdown-end md:absolute  md:right-10 top-2">
-                    <label tabIndex={1} className="btn btn-ghost btn-circle avatar">
-                        <div className="">
-                            <img referrerPolicy="no-referrer"
-                                className=' border-4 border-secondary rounded-full'
-                                src={user?.photoURL} alt=" Img" />
-                        </div>
-                    </label>
-                    <ul tabIndex={1} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-                        <li className='text-center my-4 text-xl text-semibold text-accent'>{user?.displayName}</li>
-                        <li>
-                            <a className="justify-between">
-                                Profile
-                                <span className="badge">New</span>
-                            </a>
-                        </li>
-                        <li><a>Settings</a></li>
-                        <li ><label htmlFor="sign-out-Modal" to="/" className="link-hover capitalize"> Sign Out </label></li>
-                    </ul>
-                </div>
-            } */}
         </>
 
     return (
@@ -94,10 +71,6 @@ const Navbar = () => {
                         </ul>
                     </div>
                 }
-
-
-
-
             </div>
 
             {/*/ Sign out MODAL  */}
