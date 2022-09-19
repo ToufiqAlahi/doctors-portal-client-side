@@ -7,8 +7,6 @@ import auth from '../../firebase.init';
 
 const Navbar = () => {
     const [user, loading, error] = useAuthState(auth);
-    // const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
-    // console.log(user);
     const logout = () => {
         signOut(auth);
     };
@@ -21,48 +19,27 @@ const Navbar = () => {
             <li className={`${("/Reviews" === location.pathname && "bg-accent rounded-xl text-white")}`}><Link className=" link-hover" to="/Reviews">Reviews</Link></li>
             <li className={`${("/Contact" === location.pathname && "bg-accent rounded-xl text-white")}`}><Link className=" link-hover" to="/Contact">Contact Us</Link></li>
 
-            <li
-                className={`${("/login" === location.pathname && "link-hover bg-accent rounded-xl text-white")}`}
-            >
+            {
+                user &&
+                <li className={`${("/dashboard" === location.pathname && "bg-accent rounded-xl text-white")}`}>
+                    <Link className=" link-hover" to="/dashboard">Dashboard</Link>
+                </li>
+            }
+
+            <li className={` mr-8 ${("/login" === location.pathname && "link-hover bg-accent rounded-xl text-white")}`}>
                 {
-                    user ? <Link onClick={logout} to="/" className=" link-hover capitalize">Sign Out</Link>
+                    user
+                        ? <label htmlFor="sign-out-Modal" to="/" className="link-hover capitalize"> Sign Out </label>
                         : <Link className=" link-hover" to="/login">Login</Link>
                 }
             </li>
-        </>
-
-    return (
-        <div className="navbar bg-base-100 lg:flex items-center lg:pb-10">
-            <div className="navbar-start">
-                <div className="dropdown">
-                    <label tabIndex="0" className="btn btn-ghost lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-                    </label>
-                    <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box  w-52">
-                        {menuItems}
-                    </ul>
-                </div>
-                <a href='./' className="btn btn-ghost normal-case text-2xl  "> Doctor's Portal</a>
-            </div>
-            <div className="navbar-center hidden lg:flex  ">
-                <ul className="menu mx-4 menu-horizontal p-0 font-semibold ">
-                    {menuItems}
-                </ul>
-                {/* <p className=' absolute top-0 right-0'>{user.displayName }</p> */}
-
-            </div>
-            {/* <div className='hidden lg:flex flex-col-reverse  absolute top-2 right-4'>
-                <p className=' text-sm '>{user?.displayName}</p>
-                <img className='rounded-full w-12' src={user?.photoURL} alt="Display Pic" />
-
-            </div> */}
 
             {
-                user ? <div className="dropdown dropdown-end absolute right-5 top-2 ">
+                user && <div className="dropdown dropdown-end  right-5 top-2 ">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="">
                             <img referrerPolicy="no-referrer"
-                                className='border-4 border-secondary rounded-full'
+                                className=' border-4 border-secondary rounded-full'
                                 src={user?.photoURL} alt=" Img" />
                         </div>
                     </label>
@@ -75,11 +52,41 @@ const Navbar = () => {
                             </a>
                         </li>
                         <li><a>Settings</a></li>
-                        <li onClick={logout} to="/" ><a>Logout</a></li>
+                        <li ><label htmlFor="sign-out-Modal" to="/" className="link-hover capitalize"> Sign Out </label></li>
                     </ul>
                 </div>
-                    : ""
             }
+        </>
+
+    return (
+        <div className="navbar bg-base-100 lg:flex items-center lg:pb-10">
+            <div className="navbar-start">
+                <div className="dropdown">
+                    <label tabIndex="0" className="btn btn-ghost lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                    </label>
+                    <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box  w-52"> {menuItems} </ul>
+                </div>
+                <a href='./' className="btn btn-ghost normal-case text-2xl  "> Doctor's Portal</a>
+            </div>
+            <div className="navbar-center hidden lg:flex  ">
+                <ul className="menu mx-4 menu-horizontal p-0 font-semibold "> {menuItems} </ul>
+            </div>
+
+            {/*/ Sign out MODAL  */}
+            <input type="checkbox" id="sign-out-Modal" className="modal-toggle" />
+            <div className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box">
+                    <h2 className="font-bold text-lg text-secondary">Confirm LogOut</h2>
+                    <p className="font-bold text-sm mt-6">Are you sure you want to LogOut?</p>
+                    <div className="modal-action">
+                        <label onClick={logout} htmlFor="sign-out-Modal" className="btn">Sign out</label>
+                    </div>
+                    <div className="modal-action">
+                        <label htmlFor="sign-out-Modal" className="btn btn-sm font-extrabold text-xl text-white btn-circle hover:bg-secondary absolute right-2 top-2">✕</label>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
