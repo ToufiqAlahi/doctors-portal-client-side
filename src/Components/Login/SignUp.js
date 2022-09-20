@@ -10,39 +10,32 @@ import { Link, useNavigate } from 'react-router-dom';
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
-
     const [
         createUserWithEmailAndPassword,
         user,
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
-
     const [updateProfile, updating, updateProfileError] = useUpdateProfile(auth);
-
     const navigate = useNavigate();
 
     let signInErrorMessage;
     if (error || googleError || updateProfileError) {
         signInErrorMessage = <p className='pb-4 text-lg text-red-500'>{error?.message || googleError?.message || updateProfileError?.message}</p>
     }
-
-
     if (loading || googleLoading || updating) {
         return <Loading></Loading>;
     }
-
-    // if (googleUser) {
-    //     console.log(googleUser);
-        
-    // }
+    if (user || googleUser) {
+        // navigate('/Appointment');
+    }
 
     const onSubmit = async (data) => {
         
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({ displayName: data.name});
         console.log('update done');
-        navigate('/Appointment');
+        // navigate('/Appointment');
     };
     return (
         <div className='flex justify-center items-center h-screen'>
