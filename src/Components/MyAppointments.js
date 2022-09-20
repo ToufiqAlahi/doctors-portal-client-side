@@ -13,7 +13,7 @@ const MyAppointments = () => {
                 .then(data => setAppointments(data));
         }
     }, [user]);
-    console.log(appointments);
+    // console.log(appointments);
     let index = 1;
     
     return (
@@ -36,7 +36,7 @@ const MyAppointments = () => {
                         {
                             appointments.map(appointment => 
                                 
-                                <tr>
+                                <tr key={index}>
                                     <th> {index++} </th>
                                     <td>{ appointment.patientName }</td>
                                     <td>{ appointment.date}</td>
