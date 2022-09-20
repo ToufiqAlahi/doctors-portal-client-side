@@ -30,8 +30,8 @@ const SignUp = () => {
     if (loading || googleLoading || updating) {
         return <Loading></Loading>;
     }
-    if (user || googleUser) {
-        // navigate('/Appointment');
+    if (token) {
+        navigate('/Appointment');
     }
 
     const onSubmit = async (data) => {
