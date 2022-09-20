@@ -48,14 +48,22 @@ const Navbar = () => {
             </div>
             <div className="navbar-center hidden lg:flex  ">
                 <ul className="menu mx-4 menu-horizontal p-0 font-semibold "> {menuItems} </ul>
-                
+
                 {
-                    user && <div class="dropdown dropdown-end">
-                        <label tabindex="0" class="btn btn-ghost btn-circle avatar">
-                            <div class="w-max rounded-full">
-                                <img referrerPolicy="no-referrer"
-                                    className=' border-4 border-secondary rounded-full'
-                                    src={user?.photoURL} alt=" Img" />
+                    user && <div className="dropdown dropdown-end">
+                        <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
+                            <div className="w-max rounded-full">
+                                {
+                                    user.photoURL
+                                        ? <img referrerPolicy="no-referrer"
+                                            className=' border-4 border-secondary rounded-full'
+                                            src={user.photoURL} alt=" Img" />
+                                        :
+                                        <img referrerPolicy="no-referrer"
+                                            className=' border-4 border-secondary rounded-full'  src="https://www.kindpng.com/picc/m/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" alt="User Avatar Png - User Avatar Icon Png, Transparent Png@kindpng.com"></img>
+                                }
+
+
                             </div>
                         </label>
                         <ul tabIndex={1} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
