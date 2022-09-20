@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import google from '../../../src/assets/icons/social/google.png'
 import Loading from '../Shared/Loading/Loading';
 import { Link, useNavigate } from 'react-router-dom';
+import useToken from '../../Hooks/useToken';
 
 
 const SignUp = () => {
@@ -17,9 +18,12 @@ const SignUp = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, updateProfileError] = useUpdateProfile(auth);
-    const navigate = useNavigate();
 
+    const [token] = useToken(user || googleUser);
+
+    const navigate = useNavigate();
     let signInErrorMessage;
+
     if (error || googleError || updateProfileError) {
         signInErrorMessage = <p className='pb-4 text-lg text-red-500'>{error?.message || googleError?.message || updateProfileError?.message}</p>
     }
