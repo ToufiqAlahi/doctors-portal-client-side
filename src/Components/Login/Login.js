@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import google from '../../../src/assets/icons/social/google.png'
 import Loading from '../Shared/Loading/Loading';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useToken from '../../Hooks/useToken';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -20,19 +21,22 @@ const Login = () => {
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
     let signInErrorMessage;
+    const [token] = useToken(user || googleUser);
     if (error || googleError) {
         signInErrorMessage = <p className='pb-4 text-lg text-red-500'>{error?.message || googleError?.message}</p>
     }
-
+    
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true });
+        }
+    }, [token, from, navigate])
 
     if (loading || googleLoading) {
         return <Loading></Loading>;
     }
 
-    if (user || googleUser) {
-        // console.log(googleUser);
-        navigate(from, {replace:true});
-    }
+
 
     const onSubmit = (data) => {
         // console.log(data)
