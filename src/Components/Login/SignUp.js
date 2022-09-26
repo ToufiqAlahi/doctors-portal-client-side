@@ -30,7 +30,7 @@ const SignUp = () => {
     if (loading || googleLoading || updating) {
         return <Loading></Loading>;
     }
-    if (token) {
+    if (token) { 
         navigate('/Appointment');
     }
 
