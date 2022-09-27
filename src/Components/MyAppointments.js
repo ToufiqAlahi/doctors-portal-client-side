@@ -1,11 +1,14 @@
+import { signOut } from 'firebase/auth';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 import auth from '../firebase.init';
 
 const MyAppointments = () => {
     const [user] = useAuthState(auth);
     const [appointments, setAppointments] = useState([]);
+    const navigate = useNavigate()
     useEffect(() => {
         if (user) {
             fetch(`http://localhost:5000/booking?patient=${user.email}`, {
