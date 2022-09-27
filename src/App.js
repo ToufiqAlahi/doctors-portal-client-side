@@ -16,6 +16,7 @@ import Dashboard from './Components/Dashboard';
 import MyAppointments from './Components/MyAppointments';
 import MyReview from './Components/MyReview';
 import MyHistory from './Components/MyHistory';
+import Users from './Components/Users';
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -43,6 +44,7 @@ function App() {
                 <Route index element={ <MyAppointments></MyAppointments> }></Route>
                 <Route path='review' element={ <MyReview></MyReview> }></Route>
                 <Route path='history' element={ <MyHistory></MyHistory> }></Route>
+                <Route path='users' element={ <Users></Users> }></Route>
               </Route>
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<SignUp />} />
