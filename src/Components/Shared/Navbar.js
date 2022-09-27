@@ -1,14 +1,17 @@
 import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useAuthState, useSignInWithGoogle } from 'react-firebase-hooks/auth';
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import auth from '../../firebase.init';
 
 
 const Navbar = () => {
     const [user] = useAuthState(auth);
+    const navigate = useNavigate();
     const logout = () => {
         signOut(auth);
+        localStorage.removeItem('accessToken');
+        navigate('/home');
     };
     const location = useLocation();
     const menuItems =
