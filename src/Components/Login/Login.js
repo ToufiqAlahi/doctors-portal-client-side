@@ -17,11 +17,13 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+    
     const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
     let signInErrorMessage;
     const [token] = useToken(user || googleUser);
+
     if (error || googleError) {
         signInErrorMessage = <p className='pb-4 text-lg text-red-500'>{error?.message || googleError?.message}</p>
     }
